@@ -9,9 +9,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Nishant Portfolio',
+        name: 'Devansh Portfolio',
         short_name: 'Portfolio',
-        description: 'Nishant Portfolio Progressive Web App',
+        description: 'Devansh Portfolio Progressive Web App',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',

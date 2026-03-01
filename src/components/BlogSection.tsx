@@ -149,7 +149,7 @@ const BlogSection: React.FC = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <a href="https://medium.com/@me.knishant" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest hover:text-red-500 transition-colors group">
+          <a href="https://medium.com/@devansh2054" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest hover:text-red-500 transition-colors group">
             View All on Medium <FiArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
         </div>

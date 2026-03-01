@@ -361,7 +361,7 @@ const DevActivity: React.FC = () => {
           // Construct the final URL. 
           // If we want to hit /api/profile-views:
           // Local: http://localhost:5000/api/profile-views
-          // Prod (via Vercel): /api/profile-views -> https://nishant-portfolio-api.onrender.com/api/profile-views
+
           const fetchUrl = `${cleanApiUrl}/api/profile-views`;
 
           console.log("Fetching Profile Views from:", fetchUrl);
