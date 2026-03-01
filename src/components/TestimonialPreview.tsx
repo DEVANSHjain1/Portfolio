@@ -77,14 +77,6 @@ const TestimonialPreview: React.FC = () => {
         </div>
 
         <div className="text-center">
-          <Link
-            to="/guestbook"
-            className="inline-flex items-center text-lg font-light tracking-wide hover:text-gray-600 dark:hover:text-gray-400 transition-colors duration-300"
-            data-cursor="pointer"
-          >
-            View all testimonials
-            <FiArrowUpRight className="ml-2" size={20} />
-          </Link>
         </div>
       </div>
     </section>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiArrowUpRight, FiInstagram, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FiArrowUpRight, FiInstagram, FiGithub, FiLinkedin, FiMail, FiCode } from 'react-icons/fi';
 
 const Footer: React.FC = () => {
   const [time, setTime] = useState<string>("");
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateTime = () => {
@@ -15,29 +17,40 @@ const Footer: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (sectionId: string) => {
+    if (location.pathname === '/') {
+      // If on the homepage, just scroll smoothly.
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home and pass the target section in state.
+      navigate('/', { state: { scrollTo: sectionId } });
     }
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
   };
 
   const socialLinks = [
     { name: "LINKEDIN", url: "https://www.linkedin.com/in/devansh-jain-57249420a", icon: <FiLinkedin /> },
     { name: "GITHUB", url: "https://github.com/DEVANSHjain1", icon: <FiGithub /> },
+    { name: "LEETCODE", url: "https://leetcode.com/u/Devansh_jain1/", icon: <FiCode /> },
     { name: "EMAIL", url: "mailto:devansh2054@gmail.com", icon: <FiMail /> },
     { name: "INSTAGRAM", url: "https://www.instagram.com/devanshj9910/", icon: <FiInstagram /> },
   ];
 
   const navLinks = [
     { name: "HOME", action: () => scrollToTop() },
-    { name: "ABOUT", action: () => scrollToSection('about') },
-    { name: "WORK", action: () => scrollToSection('projects') },
-    { name: "CONTACT", action: () => scrollToSection('contact') }, // Assuming contact section exists or just footer
+    { name: "ABOUT", action: () => handleNavClick('about') },
+    { name: "WORK", action: () => handleNavClick('projects') },
+    { name: "CONTACT", action: () => handleNavClick('contact') },
   ];
 
   return (

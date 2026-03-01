@@ -95,25 +95,27 @@ const logos = [
   { name: 'TypeScript', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
 
   // DevOps & Cloud
-  { name: 'Docker', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
-  { name: 'Kubernetes', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
-  { name: 'GCP', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg' },
-  { name: 'Terraform', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg' },
-  { name: 'Helm', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/helm/helm-original.svg' },
-  { name: 'GitHub Actions', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
-
-  // Databases & Messaging
-  { name: 'Kafka', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg' },
   { name: 'MongoDB', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
-  { name: 'PostgreSQL', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
-  { name: 'Cassandra', src: 'https://www.vectorlogo.zone/logos/apache_cassandra/apache_cassandra-icon.svg' },
-  { name: 'Redis', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
-
-  // AI
-  { name: 'AI', src: 'https://www.vectorlogo.zone/logos/openai/openai-icon.svg' }
+  { name: 'PostgreSQL', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' }
 ];
 
-  const logos2 = [...logos].reverse();
+  const logos2 = [
+        { name: 'Docker', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+        { name: 'Kubernetes', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
+        { name: 'GCP', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg' },
+        { name: 'Terraform', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg' },
+        { name: 'Helm', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/helm/helm-original.svg' },
+        { name: 'GitHub Actions', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+
+        // Databases & Messaging
+        { name: 'Kafka', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg' },
+
+        { name: 'Cassandra', src: 'https://www.vectorlogo.zone/logos/apache_cassandra/apache_cassandra-icon.svg' },
+        { name: 'Redis', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
+
+        // AI
+        { name: 'AI', src: 'https://img.icons8.com/?size=100&id=jglTBkSsKDwI&format=png&color=000000' }
+        ]
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -161,27 +163,33 @@ const logos = [
       );
 
       // 4. Kinetic Ticker Animation
-      // Use function to handle dynamic width calculation
       const animateTicker = (ref: React.RefObject<HTMLDivElement>, reverse: boolean = false) => {
         if (!ref.current) return;
         const el = ref.current;
-        // Clone children to ensure seamless loop if not already enough
-        // (Assuming we rendered 2 sets in JSX, but GSAP needs to know total scrolling width)
-        const totalWidth = el.scrollWidth / 2; // Since we doubled it in JSX
+        const totalWidth = el.scrollWidth / 2;
 
-        gsap.set(el, { x: reverse ? -totalWidth : 0 }); // Start position
+        // Set the initial position
+        let startX = 0;
+        if (reverse) {
+          // Start the second row at 80% of its width, so 20% is visible
+          startX = -totalWidth * 0.8;
+        }
+        gsap.set(el, { x: startX });
 
         gsap.to(el, {
           x: reverse ? 0 : -totalWidth,
-          duration: 80, // Slower for smoother infinite loop effect
+          duration: 80,
           ease: "none",
           repeat: -1,
           modifiers: {
             x: gsap.utils.unitize(x => {
               const val = parseFloat(x);
-              return reverse
-                ? (val % totalWidth) - totalWidth
-                : val % totalWidth;
+              // The wrapping logic needs to account for the custom start
+              if (reverse) {
+                // When it reaches 0, wrap back to -totalWidth
+                return (val > 0) ? -totalWidth : val % totalWidth;
+              }
+              return val % totalWidth;
             })
           }
         });
