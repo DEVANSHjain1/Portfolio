@@ -38,7 +38,7 @@ export const projects: Project[] = [
         status: 'Live',
         image: '/AI-slack.jpg',
         github: 'https://github.com/DEVANSHjain1/AI-Slack',
-        live: 'https://github.com/K-Nishant-18',
+        live: 'https://github.com/DEVANSHjain1/AI-Slack',
         impact: ['1,000+ Concurrent Threads Processed', '<1s Event Processing Latency','Fully Decoupled Async Architecture'],
         challenges: [
             {
