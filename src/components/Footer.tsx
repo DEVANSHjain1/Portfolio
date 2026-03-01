@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
   };
 
   const socialLinks = [
-    { name: "LINKEDIN", url: "https://www.linkedin.com/in/devansh-jain-57249420a", icon: <FiLinkedin /> },
+    { name: "LINKEDIN", url: "https://www.linkedin.com/in/devansh-jain-iitd/", icon: <FiLinkedin /> },
     { name: "GITHUB", url: "https://github.com/DEVANSHjain1", icon: <FiGithub /> },
     { name: "LEETCODE", url: "https://leetcode.com/u/Devansh9910/", icon: <FiCode /> },
     { name: "EMAIL", url: "mailto:devansh2054@gmail.com", icon: <FiMail /> },
